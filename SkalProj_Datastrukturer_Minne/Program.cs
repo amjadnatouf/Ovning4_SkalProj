@@ -62,35 +62,59 @@ namespace SkalProj_Datastrukturer_Minne
         /// </summary>
         static void ExamineList()
         {
-            /*
-             * Loop this method untill the user inputs something to exit to main menue.
-             * Create a switch statement with cases '+' and '-'
-             * '+': Add the rest of the input to the list (The user could write +Adam and "Adam" would be added to the list)
-             * '-': Remove the rest of the input from the list (The user could write -Adam and "Adam" would be removed from the list)
-             * In both cases, look at the count and capacity of the list
-             * As a default case, tell them to use only + or -
-             * Below you can see some inspirational code to begin working.
-            */
+            List<string> testList = new List<string>();
+            string userInput;
 
-            //List<string> theList = new List<string>();
-            //string input = Console.ReadLine();
-            //char nav = input[0];
-            //string value = input.substring(1);
+            do
+            {
+                Console.WriteLine($"Count: {testList.Count}, Capacity: {testList.Capacity}");
+                Console.WriteLine("Välj en åtgärd: ");
+                userInput = Console.ReadLine();
+                if (string.IsNullOrEmpty(userInput) || string.IsNullOrWhiteSpace(userInput))
+                    continue;
 
-            //switch(nav){...}
-        }
+                char nav = userInput[0];
+                string value = input.substring(1);
+
+                switch (nav) {
+                    case '+':
+                        testList.Add(value);
+                        Console.WriteLine($"Lägg till {value} i listan");
+                        Console.WriteLine($"Count: {testList.Count}, Capacity: {testList.Capacity}");
+                        break;
+                    case '-':
+                        if(testList.Remove(value))
+                        {
+                            Console.WriteLine($"Ta bort {value} från listan");
+                            Console.WriteLine($"Count: {testList.Count}, Capacity: {testList.Capacity}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{value} hittades inte i listan");
+                        }
+                        break;
+                    case '0':
+                        return;
+                    default:
+                        Console.WriteLine("Vänligen välj en åtgärd: '+' (lägg till objekt),"
+                            + " '-' (ta bort objekt) eller '0' (återgå till huvudmenyn)"); 
+                        break;
+                }
+                Console.WriteLine();
+                while (userInput[0] !='0');
+                }
 
         /// <summary>
         /// Examines the datastructure Queue
         /// </summary>
         static void ExamineQueue()
         {
-            /*
-             * Loop this method untill the user inputs something to exit to main menue.
-             * Create a switch with cases to enqueue items or dequeue items
-             * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
-            */
-        }
+                /*
+                 * Loop this method untill the user inputs something to exit to main menue.
+                 * Create a switch with cases to enqueue items or dequeue items
+                 * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
+                */
+                }
 
         /// <summary>
         /// Examines the datastructure Stack
@@ -102,7 +126,7 @@ namespace SkalProj_Datastrukturer_Minne
              * Create a switch with cases to push or pop items
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
-        }
+                }
 
         static void CheckParanthesis()
         {
