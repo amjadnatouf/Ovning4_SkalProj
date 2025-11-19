@@ -102,6 +102,31 @@ namespace SkalProj_Datastrukturer_Minne
                 }
                 Console.WriteLine();
                 while (userInput[0] !='0');
+
+                /*
+                 * Svar på frågorna - Ovning 1:
+                 * 
+                 * 2. När ökar listans kapacitet?
+                 * kapaciteten ökar när vi försöker lägga till elementer i listan och Counter == Capacity
+                 * 
+                 * 3. Med hur mycket ökar kapaciteten?
+                 * Kapaciteten när listan skapas är 0. När man lägger till det första elementet ökarkapaciteten
+                 * med 4 som standard i C#. Därefter fördubblas kapaciteten varje gång listan behöver växa.
+                 * 0 -> 4 -> 8 -> 16 -> 32 ...
+                 * 
+                 * 4. Varför ökar inte listans kapacitet i samma takt som element läggs till?
+                 * Listans kapacitet ökar exponentiellt av prestandaskäl: att kopiera arrayen för varje nytt 
+                 * element vore dyrt, medan exponentiell ökning balanserar minnesanvändning och effektivitet.
+                 * 
+                 * 5. Minskar kapaciteten när element tas bort ur listan?
+                 * Nej, kapaciteten minskar inte automatiskt när element tas bort ur listan endast Count förändras.
+                 * men kapaciteten förblir samma. 
+                 * 
+                 * 6. När är det då fördelaktigt att använda en egendefinierad array istället för en lista?
+                 * Använd en array när storleken är känd och konstant, och när maximal prestanda med minimal 
+                 * overhead behövs. Använd istället en lista när storleken är okänd eller dynamisk, och när du ofta 
+                 * behöver lägga till eller ta bort element.
+                 */
                 }
 
         /// <summary>
