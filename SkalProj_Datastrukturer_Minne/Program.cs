@@ -134,11 +134,49 @@ namespace SkalProj_Datastrukturer_Minne
         /// </summary>
         static void ExamineQueue()
         {
-                /*
-                 * Loop this method untill the user inputs something to exit to main menue.
-                 * Create a switch with cases to enqueue items or dequeue items
-                 * Make sure to look at the queue after Enqueueing and Dequeueing to see how it behaves
-                */
+                Queue<string> testQueue = new Queue<string>();
+                string userInput;
+
+                do
+                {
+                    // Check the queue
+                    Console.WriteLine(string.Join(", ", testQueue.Select(x => x.ToString())));
+                    Console.WriteLine("Välj en åtgärd: ");
+                    userInput = Console.ReadLine();
+                    if (string.IsNullOrEmpty(userInput) || string.IsNullOrWhiteSpace(userInput))
+                        continue;
+
+                    char nav = userInput[0];
+                    string value = input.substring(1);
+
+                    switch (nav)
+                    {
+                        case '+':
+                            testQueue.Enqueue(value);
+                            Console.WriteLine($"{value} gick med i queue");
+                            Console.WriteLine($"Queue count: {testQueue.Count}");
+                            break;
+                        case '-':
+                            if (testQueue.Count > 0)
+                            {
+                                string served = testQueue.Dequeue();
+                                Console.WriteLine($"{value} expedierad och lämnade queue");
+                                Console.WriteLine($"Queue count: {testQueue.Count}");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Queue är tomt!");
+                            }
+                            break;
+                        case '0':
+                            return;
+                        default:
+                            Console.WriteLine("Vänligen välj en åtgärd: '+' (lägg till objekt),"
+                                + " '-' (ta bort objekt) eller '0' (återgå till huvudmenyn)");
+                            break;
+                    }
+                    Console.WriteLine();
+                    while (userInput[0] != '0') ;
                 }
 
         /// <summary>
