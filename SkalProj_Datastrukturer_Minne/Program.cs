@@ -18,10 +18,11 @@ namespace SkalProj_Datastrukturer_Minne
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
                     + "\n4. CheckParenthesis"
-                    + "\n0. Exit the application");
+                    + "\n0. Exit the application\n");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
                 {
+                    Console.Write("Välj en åtgärd: ");
                     input = Console.ReadLine()![0]; //Tries to set input to the first char in an input line
                 }
                 catch (IndexOutOfRangeException) //If the input line is empty, we ask the users for some input.
@@ -65,19 +66,35 @@ namespace SkalProj_Datastrukturer_Minne
             List<string> testList = new List<string>();
             string userInput;
 
-            Console.WriteLine(" ---- List ");
+            Console.WriteLine("\n---- Listmeny  ----");
+            Console.WriteLine("+[string] : Lägg till sträng i listant.");
+            Console.WriteLine("-[string] : Ta bort sträng från listan.");
+            Console.WriteLine("0         : Återgå till huvudmenyn.");
+            Console.WriteLine();
 
             do
             {
                 Console.WriteLine($"Count: {testList.Count}, Capacity: {testList.Capacity}");
-                Console.WriteLine("Välj en åtgärd: ");
-                userInput = Console.ReadLine();
-                if (string.IsNullOrEmpty(userInput) || string.IsNullOrWhiteSpace(userInput))
-                    continue;
+                Console.Write("Välj en åtgärd: ");
+                userInput = "";
+                char nav = ' ';
+                string value = "";
+                try
+                {
+                    userInput = Console.ReadLine();
+                    if (string.IsNullOrEmpty(userInput))
+                    {
+                        Console.WriteLine("Du måste ange något!");
+                        return;
+                    }
 
-                char nav = userInput[0];
-                string value = userInput.Substring(1);
-
+                    nav = userInput[0];
+                    value = userInput.Length > 1 ? userInput.Substring(1) : "";
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Input får inte vara tom!");
+                }
                 switch (nav)
                 {
                     case '+':
@@ -97,6 +114,7 @@ namespace SkalProj_Datastrukturer_Minne
                         }
                         break;
                     case '0':
+                        Console.WriteLine();
                         return;
                     default:
                         Console.WriteLine("Vänligen välj en åtgärd: '+' (lägg till objekt),"
@@ -141,18 +159,36 @@ namespace SkalProj_Datastrukturer_Minne
             Queue<string> testQueue = new Queue<string>();
             string userInput;
 
+            Console.WriteLine("\n---- Queuemeny  ----");
+            Console.WriteLine("+[string] : Enqueue sträng i queue.");
+            Console.WriteLine("-[string] : Dequeue första sträng från queue.");
+            Console.WriteLine("0         : Återgå till huvudmenyn.");
+            Console.WriteLine();
+
             do
             {
                 // Check the queue
                 Console.WriteLine(string.Join(", ", testQueue.Select(x => x.ToString())));
-                Console.WriteLine("Välj en åtgärd: ");
-                userInput = Console.ReadLine();
-                if (string.IsNullOrEmpty(userInput) || string.IsNullOrWhiteSpace(userInput))
-                    continue;
+                Console.Write("Välj en åtgärd: ");
+                userInput = "";
+                char nav = ' ';
+                string value = "";
+                try
+                {
+                    userInput = Console.ReadLine();
+                    if (string.IsNullOrEmpty(userInput))
+                    {
+                        Console.WriteLine("Du måste ange något!");
+                        return;
+                    }
 
-                char nav = userInput[0];
-                string value = userInput.Substring(1);
-
+                    nav = userInput[0];
+                    value = userInput.Length > 1 ? userInput.Substring(1) : "";
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Input får inte vara tom!");
+                }
                 switch (nav)
                 {
                     case '+':
@@ -173,6 +209,7 @@ namespace SkalProj_Datastrukturer_Minne
                         }
                         break;
                     case '0':
+                        Console.WriteLine();
                         return;
                     default:
                         Console.WriteLine("Vänligen välj en åtgärd: '+' (lägg till objekt),"
@@ -211,18 +248,37 @@ namespace SkalProj_Datastrukturer_Minne
             Stack<string> testStack = new Stack<string>();
             string userInput;
 
+            Console.WriteLine("\n---- Stackmeny  ----");
+            Console.WriteLine("+[string] : Lägg till sträng i stacken.");
+            Console.WriteLine("-[string] : Ta bort sträng från stacken.");
+            Console.WriteLine("r         : Omvänd text");
+            Console.WriteLine("0         : Återgå till huvudmenyn.");
+            Console.WriteLine();
+
             do
             {
                 // Check the stack
                 Console.WriteLine(string.Join(", ", testStack.Select(x => x.ToString())));
-                Console.WriteLine("Välj en åtgärd: ");
-                userInput = Console.ReadLine();
-                if (string.IsNullOrEmpty(userInput) || string.IsNullOrWhiteSpace(userInput))
-                    continue;
+                Console.Write("Välj en åtgärd: ");
+                userInput = "";
+                char nav = ' ';
+                string value = "";
+                try
+                {
+                    userInput = Console.ReadLine();
+                    if (string.IsNullOrEmpty(userInput))
+                    {
+                        Console.WriteLine("Du måste ange något!");
+                        return;
+                    }
 
-                char nav = userInput.ToUpper()[0];
-                string value = userInput.Substring(1);
-
+                    nav = userInput.ToUpper()[0];
+                    value = userInput.Substring(1);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Input får inte vara tom!");
+                }
                 switch (nav)
                 {
                     case '+':
@@ -246,6 +302,7 @@ namespace SkalProj_Datastrukturer_Minne
                         ReverseText();
                         break;
                     case '0':
+                        Console.WriteLine();
                         return;
                     default:
                         Console.WriteLine("Vänligen välj en åtgärd: '+' (lägg till objekt),"
