@@ -177,6 +177,20 @@ namespace SkalProj_Datastrukturer_Minne
                     }
                     Console.WriteLine();
                     while (userInput[0] != '0') ;
+
+                    /*
+                    * Svar på frågorna - Ovning 2:
+                    * 
+                    * 1. Simulera följande kö på papper:
+                    * a. ICA öppnar och kön till kassan är       -> []
+                    * b. Kalle ställer sig i                     -> [Kalle]
+                    * c. Greta ställer sig i                     -> [Kalle, Greta]
+                    * d. Kalle blir expedierad och lämnar        -> [Greta]
+                    * e. Stina ställer sig i                     -> [Greta, Stina]
+                    * f. Greta blir expedierad och lämnar        -> [Stina]
+                    * g. Olle ställer sig i                      -> [Stina, Olle]
+                    * h.      … Queue-klassen fungerar enligt Först In Först (FIFO) principen
+                    */
                 }
 
         /// <summary>
