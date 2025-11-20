@@ -100,25 +100,15 @@ namespace SkalProj_Datastrukturer_Minne
             {
                 Console.WriteLine($"Count: {testList.Count}, Capacity: {testList.Capacity}");
                 Console.Write("Välj en åtgärd: ");
-                userInput = "";
-                char nav = ' ';
-                string value = "";
-                try
+                userInput = Console.ReadLine()!;
+                if (string.IsNullOrEmpty(userInput))
                 {
-                    userInput = Console.ReadLine();
-                    if (string.IsNullOrEmpty(userInput))
-                    {
-                        Console.WriteLine("\nDu måste ange något input!\n");
-                        return;
-                    }
+                    Console.WriteLine("\nDu måste ange något input!\n");
+                    return;
+                }
 
-                    nav = userInput[0];
-                    value = userInput.Length > 1 ? userInput.Substring(1) : "";
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"Input får inte vara tom {e.Message}!");
-                }
+                char nav = userInput[0];
+                string value = userInput.Length > 1 ? userInput.Substring(1) : "";
                 switch (nav)
                 {
                     case '+':
@@ -194,25 +184,15 @@ namespace SkalProj_Datastrukturer_Minne
                 // Check the queue
                 Console.WriteLine(string.Join(", ", testQueue.Select(x => x.ToString())));
                 Console.Write("Välj en åtgärd: ");
-                userInput = "";
-                char nav = ' ';
-                string value = "";
-                try
+                userInput = Console.ReadLine()!;
+                if (string.IsNullOrEmpty(userInput))
                 {
-                    userInput = Console.ReadLine();
-                    if (string.IsNullOrEmpty(userInput))
-                    {
-                        Console.WriteLine("\nDu måste ange något input!\n");
-                        return;
-                    }
+                    Console.WriteLine("\nDu måste ange något input!\n");
+                    return;
+                }
 
-                    nav = userInput[0];
-                    value = userInput.Length > 1 ? userInput.Substring(1) : "";
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"Input får inte vara tom {e.Message}!");
-                }
+                char nav = userInput[0];
+                string value = userInput.Length > 1 ? userInput.Substring(1) : "";
                 switch (nav)
                 {
                     case '+':
@@ -279,25 +259,15 @@ namespace SkalProj_Datastrukturer_Minne
                 // Check the stack
                 Console.WriteLine(string.Join(", ", testStack.Select(x => x.ToString())));
                 Console.Write("Välj en åtgärd: ");
-                userInput = "";
-                char nav = ' ';
-                string value = "";
-                try
+                userInput = Console.ReadLine()!;
+                if (string.IsNullOrEmpty(userInput))
                 {
-                    userInput = Console.ReadLine();
-                    if (string.IsNullOrEmpty(userInput))
-                    {
-                        Console.WriteLine("\nDu måste ange något!\n");
-                        return;
-                    }
+                    Console.WriteLine("\nDu måste ange något!\n");
+                    return;
+                }
 
-                    nav = userInput.ToUpper()[0];
-                    value = userInput.Substring(1);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"Input får inte vara tom {e.Message}!");
-                }
+                char nav = userInput.ToUpper()[0];
+                string value = userInput.Length > 1 ? userInput.Substring(1) : "";
                 switch (nav)
                 {
                     case '+':
@@ -399,21 +369,12 @@ namespace SkalProj_Datastrukturer_Minne
             Console.WriteLine();
             Console.Write("Ange en sträng för att kontrollera: ");
 
-            string userInput = "";
-            try
+            string userInput = Console.ReadLine()!;
+            if (string.IsNullOrEmpty(userInput))
             {
-                userInput = Console.ReadLine();
-                if (string.IsNullOrEmpty(userInput))
-                {
-                    Console.WriteLine("\nDu måste ange något input!\n");
-                    return;
-                }
+                Console.WriteLine("\nDu måste ange något input!\n");
+                return;
             }
-            catch (Exception)
-            {
-                Console.WriteLine("Input får inte vara tom!");
-            }
-
             bool isWellFormed = hasCorrectParanthesis(userInput);
             Console.WriteLine($"Result: {(isWellFormed ? "Well formed" : "Not well formed")}");
             Console.WriteLine();
