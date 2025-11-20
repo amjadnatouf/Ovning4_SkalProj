@@ -65,6 +65,8 @@ namespace SkalProj_Datastrukturer_Minne
             List<string> testList = new List<string>();
             string userInput;
 
+            Console.WriteLine(" ---- List ");
+
             do
             {
                 Console.WriteLine($"Count: {testList.Count}, Capacity: {testList.Capacity}");
@@ -74,16 +76,17 @@ namespace SkalProj_Datastrukturer_Minne
                     continue;
 
                 char nav = userInput[0];
-                string value = input.substring(1);
+                string value = userInput.Substring(1);
 
-                switch (nav) {
+                switch (nav)
+                {
                     case '+':
                         testList.Add(value);
                         Console.WriteLine($"Lägg till {value} i listan");
                         Console.WriteLine($"Count: {testList.Count}, Capacity: {testList.Capacity}");
                         break;
                     case '-':
-                        if(testList.Remove(value))
+                        if (testList.Remove(value))
                         {
                             Console.WriteLine($"Ta bort {value} från listan");
                             Console.WriteLine($"Count: {testList.Count}, Capacity: {testList.Capacity}");
@@ -97,213 +100,217 @@ namespace SkalProj_Datastrukturer_Minne
                         return;
                     default:
                         Console.WriteLine("Vänligen välj en åtgärd: '+' (lägg till objekt),"
-                            + " '-' (ta bort objekt) eller '0' (återgå till huvudmenyn)"); 
+                            + " '-' (ta bort objekt) eller '0' (återgå till huvudmenyn)");
                         break;
                 }
                 Console.WriteLine();
-                while (userInput[0] !='0');
+            }
+            while (userInput[0] != '0');
 
-                /*
-                 * Svar på frågorna - Ovning 1:
-                 * 
-                 * 2. När ökar listans kapacitet?
-                 * kapaciteten ökar när vi försöker lägga till elementer i listan och Counter == Capacity
-                 * 
-                 * 3. Med hur mycket ökar kapaciteten?
-                 * Kapaciteten när listan skapas är 0. När man lägger till det första elementet ökarkapaciteten
-                 * med 4 som standard i C#. Därefter fördubblas kapaciteten varje gång listan behöver växa.
-                 * 0 -> 4 -> 8 -> 16 -> 32 ...
-                 * 
-                 * 4. Varför ökar inte listans kapacitet i samma takt som element läggs till?
-                 * Listans kapacitet ökar exponentiellt av prestandaskäl: att kopiera arrayen för varje nytt 
-                 * element vore dyrt, medan exponentiell ökning balanserar minnesanvändning och effektivitet.
-                 * 
-                 * 5. Minskar kapaciteten när element tas bort ur listan?
-                 * Nej, kapaciteten minskar inte automatiskt när element tas bort ur listan endast Count förändras.
-                 * men kapaciteten förblir samma. 
-                 * 
-                 * 6. När är det då fördelaktigt att använda en egendefinierad array istället för en lista?
-                 * Använd en array när storleken är känd och konstant, och när maximal prestanda med minimal 
-                 * overhead behövs. Använd istället en lista när storleken är okänd eller dynamisk, och när du ofta 
-                 * behöver lägga till eller ta bort element.
-                 */
-                }
+            /*
+             * Svar på frågorna - Ovning 1:
+             * 
+             * 2. När ökar listans kapacitet?
+             * kapaciteten ökar när vi försöker lägga till elementer i listan och Counter == Capacity
+             * 
+             * 3. Med hur mycket ökar kapaciteten?
+             * Kapaciteten när listan skapas är 0. När man lägger till det första elementet ökarkapaciteten
+             * med 4 som standard i C#. Därefter fördubblas kapaciteten varje gång listan behöver växa.
+             * 0 -> 4 -> 8 -> 16 -> 32 ...
+             * 
+             * 4. Varför ökar inte listans kapacitet i samma takt som element läggs till?
+             * Listans kapacitet ökar exponentiellt av prestandaskäl: att kopiera arrayen för varje nytt 
+             * element vore dyrt, medan exponentiell ökning balanserar minnesanvändning och effektivitet.
+             * 
+             * 5. Minskar kapaciteten när element tas bort ur listan?
+             * Nej, kapaciteten minskar inte automatiskt när element tas bort ur listan endast Count förändras.
+             * men kapaciteten förblir samma. 
+             * 
+             * 6. När är det då fördelaktigt att använda en egendefinierad array istället för en lista?
+             * Använd en array när storleken är känd och konstant, och när maximal prestanda med minimal 
+             * overhead behövs. Använd istället en lista när storleken är okänd eller dynamisk, och när du ofta 
+             * behöver lägga till eller ta bort element.
+             */
+        }
 
         /// <summary>
         /// Examines the datastructure Queue
         /// </summary>
         static void ExamineQueue()
         {
-                Queue<string> testQueue = new Queue<string>();
-                string userInput;
+            Queue<string> testQueue = new Queue<string>();
+            string userInput;
 
-                do
+            do
+            {
+                // Check the queue
+                Console.WriteLine(string.Join(", ", testQueue.Select(x => x.ToString())));
+                Console.WriteLine("Välj en åtgärd: ");
+                userInput = Console.ReadLine();
+                if (string.IsNullOrEmpty(userInput) || string.IsNullOrWhiteSpace(userInput))
+                    continue;
+
+                char nav = userInput[0];
+                string value = userInput.Substring(1);
+
+                switch (nav)
                 {
-                    // Check the queue
-                    Console.WriteLine(string.Join(", ", testQueue.Select(x => x.ToString())));
-                    Console.WriteLine("Välj en åtgärd: ");
-                    userInput = Console.ReadLine();
-                    if (string.IsNullOrEmpty(userInput) || string.IsNullOrWhiteSpace(userInput))
-                        continue;
-
-                    char nav = userInput[0];
-                    string value = input.substring(1);
-
-                    switch (nav)
-                    {
-                        case '+':
-                            testQueue.Enqueue(value);
-                            Console.WriteLine($"{value} gick med i queue");
+                    case '+':
+                        testQueue.Enqueue(value);
+                        Console.WriteLine($"{value} gick med i queue");
+                        Console.WriteLine($"Queue count: {testQueue.Count}");
+                        break;
+                    case '-':
+                        if (testQueue.Count > 0)
+                        {
+                            string served = testQueue.Dequeue();
+                            Console.WriteLine($"{value} expedierad och lämnade queue");
                             Console.WriteLine($"Queue count: {testQueue.Count}");
-                            break;
-                        case '-':
-                            if (testQueue.Count > 0)
-                            {
-                                string served = testQueue.Dequeue();
-                                Console.WriteLine($"{value} expedierad och lämnade queue");
-                                Console.WriteLine($"Queue count: {testQueue.Count}");
-                            }
-                            else
-                            {
-                                Console.WriteLine("Queue är tom!");
-                            }
-                            break;
-                        case '0':
-                            return;
-                        default:
-                            Console.WriteLine("Vänligen välj en åtgärd: '+' (lägg till objekt),"
-                                + " '-' (ta bort objekt) eller '0' (återgå till huvudmenyn)");
-                            break;
-                    }
-                    Console.WriteLine();
-                    while (userInput[0] != '0') ;
-
-                    /*
-                    * Svar på frågorna - Ovning 2:
-                    * 
-                    * 1. Simulera följande kö på papper:
-                    * a. ICA öppnar och kön till kassan är       -> []
-                    * b. Kalle ställer sig i                     -> [Kalle]
-                    * c. Greta ställer sig i                     -> [Kalle, Greta]
-                    * d. Kalle blir expedierad och lämnar        -> [Greta]
-                    * e. Stina ställer sig i                     -> [Greta, Stina]
-                    * f. Greta blir expedierad och lämnar        -> [Stina]
-                    * g. Olle ställer sig i                      -> [Stina, Olle]
-                    * h.      … Queue-klassen fungerar enligt Först In Först (FIFO) principen
-                    */
+                        }
+                        else
+                        {
+                            Console.WriteLine("Queue är tom!");
+                        }
+                        break;
+                    case '0':
+                        return;
+                    default:
+                        Console.WriteLine("Vänligen välj en åtgärd: '+' (lägg till objekt),"
+                            + " '-' (ta bort objekt) eller '0' (återgå till huvudmenyn)");
+                        break;
                 }
+                Console.WriteLine();
+            }
+            while (userInput[0] != '0');
+
+            /*
+            * Svar på frågorna - Ovning 2:
+            * 
+            * 1. Simulera följande kö på papper:
+            * a. ICA öppnar och kön till kassan är       -> []
+            * b. Kalle ställer sig i                     -> [Kalle]
+            * c. Greta ställer sig i                     -> [Kalle, Greta]
+            * d. Kalle blir expedierad och lämnar        -> [Greta]
+            * e. Stina ställer sig i                     -> [Greta, Stina]
+            * f. Greta blir expedierad och lämnar        -> [Stina]
+            * g. Olle ställer sig i                      -> [Stina, Olle]
+            * h.      … Queue-klassen fungerar enligt Först In Först (FIFO) principen
+            */
+        }
 
         /// <summary>
         /// Examines the datastructure Stack
         /// </summary>
         static void ExamineStack()
         {
-                    /*
-                     * Loop this method until the user inputs something to exit to main menue.
-                     * Create a switch with cases to push or pop items
-                     * Make sure to look at the stack after pushing and and poping to see how it behaves
-                    */
-                    Stack<string> testStack = new Stack<string>();
-                    string userInput;
+            /*
+             * Loop this method until the user inputs something to exit to main menue.
+             * Create a switch with cases to push or pop items
+             * Make sure to look at the stack after pushing and and poping to see how it behaves
+            */
+            Stack<string> testStack = new Stack<string>();
+            string userInput;
 
-                    do
-                    {
-                        // Check the stack
-                        Console.WriteLine(string.Join(", ", testStack.Select(x => x.ToString())));
-                        Console.WriteLine("Välj en åtgärd: ");
-                        userInput = Console.ReadLine();
-                        if (string.IsNullOrEmpty(userInput) || string.IsNullOrWhiteSpace(userInput))
-                            continue;
+            do
+            {
+                // Check the stack
+                Console.WriteLine(string.Join(", ", testStack.Select(x => x.ToString())));
+                Console.WriteLine("Välj en åtgärd: ");
+                userInput = Console.ReadLine();
+                if (string.IsNullOrEmpty(userInput) || string.IsNullOrWhiteSpace(userInput))
+                    continue;
 
-                        char nav = userInput.ToUpper()[0];
-                        string value = input.substring(1);
+                char nav = userInput.ToUpper()[0];
+                string value = userInput.Substring(1);
 
-                        switch (nav)
+                switch (nav)
+                {
+                    case '+':
+                        testStack.Push(value);
+                        Console.WriteLine($"{value} trycktes på stacken");
+                        Console.WriteLine($"Stack count: {testStack.Count}");
+                        break;
+                    case '-':
+                        if (testStack.Count > 0)
                         {
-                            case '+':
-                                testStack.Push(value);
-                                Console.WriteLine($"{value} trycktes på stacken");
-                                Console.WriteLine($"Stack count: {testStack.Count}");
-                                break;
-                            case '-':
-                                if (testStack.Count > 0)
-                                {
-                                    string removed = testStack.Pop();
-                                    Console.WriteLine($"{removed} togs bort från stacken");
-                                    Console.WriteLine($"Stack count: {testQueue.Count}");
-                                }
-                                else
-                                {
-                                    Console.WriteLine("Stacken är tom!");
-                                }
-                                break;
-                            case 'R':
-                                ReverseText();
-                                break;
-                            case '0':
-                                return;
-                            default:
-                                Console.WriteLine("Vänligen välj en åtgärd: '+' (lägg till objekt),"
-                                    + " '-' (ta bort objekt) eller '0' (återgå till huvudmenyn)");
-                                break;
+                            string removed = testStack.Pop();
+                            Console.WriteLine($"{removed} togs bort från stacken");
+                            Console.WriteLine($"Stack count: {testStack.Count}");
                         }
-                        Console.WriteLine();
-                        while (userInput.ToUpper()[0] != '0');
-                        /*
-                        * Svar på frågorna - Ovning 3:
-                        * 
-                        * 1. Simulera följande kö på papper:
-                        * a. ICA öppnar och kön till kassan är       -> []
-                        * b. Kalle ställer sig i                     -> [Kalle]
-                        * c. Greta ställer sig i                     -> [Kalle, Greta]
-                        * d. Kalle blir expedierad och lämnar        -> [Kalle]
-                        * e. Stina ställer sig i                     -> [Kalle, Stina]
-                        * f. Greta blir expedierad och lämnar        -> [Kalle]
-                        * g. Olle ställer sig i                      -> [Kalle, Olle]
-                        * h.      … Stack-klassen fungerar enligt Först In Sist ut (FILO) principen
-                        * vilket betyder att det sista elementet som läggs till tas bort först. Därför
-                        * fungerar stacken inte för att simulera en kö som i exemplet med ICA.
-                        * Förklaring med exemplet:
-                        * I kön: [Kalle, Greta] står Kalle först. När Kalle ska expedieras tas han bort först,
-                        * vilket fungerar korrekt med en kö (FIFO).
-                        * Om vi istället använde en stack, skulle det senaste tillsatta elementet (Greta) tas bort först,
-                        * vilket bryter ordningen. Felet uppstår alltså redan vid första expedieringen och fortsätter för
-                        * varje person som ska expedieras, eftersom stacken alltid tar bort det översta elementet,
-                        * inte den som stått längst i kön. 
-                        */
-                    }
-
-                    /// <summary>
-                    /// Reversed a text string method using stack
-                    /// </summary>
-                    static void ReverseText() {
-                        Console.WriteLine("---- Omvänd text ----");
-                        Console.WriteLine("Ange texten som ska vändas: ");
-
-                        string userString = Console.ReadLine();
-
-                        if (string.IsNullOrEmpty(userString) || string.IsNullOrWhiteSpace(userString))
+                        else
                         {
-                            Console.WriteLine("Ingen text hittades!");
-                            return;
+                            Console.WriteLine("Stacken är tom!");
                         }
+                        break;
+                    case 'R':
+                        ReverseText();
+                        break;
+                    case '0':
+                        return;
+                    default:
+                        Console.WriteLine("Vänligen välj en åtgärd: '+' (lägg till objekt),"
+                            + " '-' (ta bort objekt) eller '0' (återgå till huvudmenyn)");
+                        break;
+                }
+                Console.WriteLine();
+            }
+            while (userInput.ToUpper()[0] != '0');
+            /*
+            * Svar på frågorna - Ovning 3:
+            * 
+            * 1. Simulera följande kö på papper:
+            * a. ICA öppnar och kön till kassan är       -> []
+            * b. Kalle ställer sig i                     -> [Kalle]
+            * c. Greta ställer sig i                     -> [Kalle, Greta]
+            * d. Kalle blir expedierad och lämnar        -> [Kalle]
+            * e. Stina ställer sig i                     -> [Kalle, Stina]
+            * f. Greta blir expedierad och lämnar        -> [Kalle]
+            * g. Olle ställer sig i                      -> [Kalle, Olle]
+            * h.      … Stack-klassen fungerar enligt Först In Sist ut (FILO) principen
+            * vilket betyder att det sista elementet som läggs till tas bort först. Därför
+            * fungerar stacken inte för att simulera en kö som i exemplet med ICA.
+            * Förklaring med exemplet:
+            * I kön: [Kalle, Greta] står Kalle först. När Kalle ska expedieras tas han bort först,
+            * vilket fungerar korrekt med en kö (FIFO).
+            * Om vi istället använde en stack, skulle det senaste tillsatta elementet (Greta) tas bort först,
+            * vilket bryter ordningen. Felet uppstår alltså redan vid första expedieringen och fortsätter för
+            * varje person som ska expedieras, eftersom stacken alltid tar bort det översta elementet,
+            * inte den som stått längst i kön. 
+            */
+        }
 
-                        Stack<char> sc = new Stack<char>();
+        /// <summary>
+        /// Reversed a text string method using stack
+        /// </summary>
+        static void ReverseText()
+        {
+            Console.WriteLine("---- Omvänd text ----");
+            Console.WriteLine("Ange texten som ska vändas: ");
 
-                        foreach (var c in userString)
-                        {
-                            sc.Push(c);
-                        }
+            string userString = Console.ReadLine();
 
-                        string reversedString = "";
-                        while (sc.Count>0)
-                        {
-                            reversedString += sc.Pop();
-                        }
+            if (string.IsNullOrEmpty(userString) || string.IsNullOrWhiteSpace(userString))
+            {
+                Console.WriteLine("Ingen text hittades!");
+                return;
+            }
 
-                        Console.WriteLine($"Originalsträngen är: {userString}");
-                        Console.WriteLine($"Den omvända strängen är: {reversedString}");
-                    }
+            Stack<char> sc = new Stack<char>();
+
+            foreach (var c in userString)
+            {
+                sc.Push(c);
+            }
+
+            string reversedString = "";
+            while (sc.Count > 0)
+            {
+                reversedString += sc.Pop();
+            }
+
+            Console.WriteLine($"Originalsträngen är: {userString}");
+            Console.WriteLine($"Den omvända strängen är: {reversedString}");
+        }
 
         static void CheckParanthesis()
         {
