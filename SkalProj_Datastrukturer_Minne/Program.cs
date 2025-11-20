@@ -240,11 +240,6 @@ namespace SkalProj_Datastrukturer_Minne
         /// </summary>
         static void ExamineStack()
         {
-            /*
-             * Loop this method until the user inputs something to exit to main menue.
-             * Create a switch with cases to push or pop items
-             * Make sure to look at the stack after pushing and and poping to see how it behaves
-            */
             Stack<string> testStack = new Stack<string>();
             string? userInput;
 
@@ -371,11 +366,6 @@ namespace SkalProj_Datastrukturer_Minne
 
         static void CheckParanthesis()
         {
-            /*
-             * Use this method to check if the paranthesis in a string is Correct or incorrect.
-             * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
-             * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
-             */
             Console.WriteLine("\n---- Kontrollera parentesmeny  ----");
             Console.WriteLine("1. Kontrollera om en sträng har korrekt formaterade parenteser.");
             Console.WriteLine("2. Giltiga parenteser: (), {}, []");
