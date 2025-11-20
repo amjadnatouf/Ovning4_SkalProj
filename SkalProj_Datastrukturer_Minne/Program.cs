@@ -24,7 +24,7 @@ namespace SkalProj_Datastrukturer_Minne
                     + "\n7. CheckIterativeOdd"
                     + "\n8. CheckIterativeEven"
                     + "\n9. CheckFibonacciIterative"
-                    + "\n0. Exit the application\n");
+                    + "\nq. Exit the application\n");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
                 {
@@ -462,6 +462,28 @@ namespace SkalProj_Datastrukturer_Minne
             }
             // Recursive case: nth odd = (n-1)th odd + 2
             return RecursiveOdd(n - 1) + 2;
+
+            /*
+            * Svar på frågorna - Ovning 5:
+            * 
+            * 1. Illustrera förloppen för RecursiveOdd(5) 
+            * - RecursiveOdd(5) bygger upp ett anropsstack:
+            * - n = 5 och n != 1; metoden anropar då RecursiveOdd(5 - 1) + 2.
+            * - n = 4 och n != 1; metoden anropar då RecursiveOdd(4 - 1) + 2.
+            * - detta fortsätter tills n == 1; då returneras värdet 1.
+            * - När basfallet har nåtts börjar varje tidigare anrop lägga på +2 och returnera resultatet uppåt i stacken.
+            * 
+            * Förklaring:
+            * 1. RecursiveOdd(5) → RecursiveOdd(4) + 2
+            * 2. RecursiveOdd(4) → RecursiveOdd(3) + 2
+            * 3. RecursiveOdd(3) → RecursiveOdd(2) + 2
+            * 4. RecursiveOdd(2) → RecursiveOdd(1) + 2
+            * 5. RecursiveOdd(1) → return 1 (base)
+            * 6. Så: 1 → 3 → 5 → 7 → 9
+            * 
+            * Result: 9
+            * Stack depth: 5
+            */
         }
 
         /// <summary>
@@ -599,8 +621,27 @@ namespace SkalProj_Datastrukturer_Minne
             {
                 result += 2;
             }
-
             return result;
+            /*
+            * Svar på frågorna - Ovning 6:
+            * 
+            * 1. Illustrera förloppen för IterativeOdd(5) 
+            * - IterativeOdd(5) börjar med: result = 1.
+            * - i startar på 0 och loopen kör tills i = n - 1.
+            * - Vid varje iteration adderas 2 till det tidigare resultatet och det nya värdet lagras i variabeln result.
+            * - När iterationen avslutas returneras det slutliga värdet av result.
+            * 
+            * Förklaring:
+            * Loop iteration 1 (i=0): result = 1 + 2 = 3
+            * Loop iteration 2 (i=1): result = 3 + 2 = 5
+            * Loop iteration 3 (i=2): result = 5 + 2 = 7
+            * Loop iteration 4 (i=3): result = 7 + 2 = 9
+            * 
+            * Loop slutar (i=4, villkor i < 4 är falskt)
+            * Return: 9
+            * 
+            * Resultat: 9
+            */
         }
 
         /// <summary>
@@ -704,4 +745,14 @@ namespace SkalProj_Datastrukturer_Minne
             return current;
         }
     }
+
+    /*
+     * Fråga: Utgå ifrån era nyvunna kunskaper om iteration, rekursion och minneshantering.
+     * Vilken av ovanstående funktioner är mest minnesvänlig och varför? 
+     * 
+     * Den iterativa funktionen är mest minnesvänlig, eftersom iteration använder ett fast minnesutrymme, 
+     * medan rekursion skapar ett nytt stack-anrop för varje nivå. 
+     * Rekursionen använder alltså mer stackminne och riskerar stack overflow vid stora n,
+     * medan iteration gör samma arbete utan att bygga upp en anropsstack.
+     */
 }
