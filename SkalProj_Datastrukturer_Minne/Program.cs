@@ -64,7 +64,7 @@ namespace SkalProj_Datastrukturer_Minne
         static void ExamineList()
         {
             List<string> testList = new List<string>();
-            string userInput;
+            string? userInput;
 
             Console.WriteLine("\n---- Listmeny  ----");
             Console.WriteLine("+[string] : Lägg till sträng i listant.");
@@ -91,9 +91,9 @@ namespace SkalProj_Datastrukturer_Minne
                     nav = userInput[0];
                     value = userInput.Length > 1 ? userInput.Substring(1) : "";
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    Console.WriteLine("Input får inte vara tom!");
+                    Console.WriteLine($"Input får inte vara tom {e.Message}!");
                 }
                 switch (nav)
                 {
@@ -157,7 +157,7 @@ namespace SkalProj_Datastrukturer_Minne
         static void ExamineQueue()
         {
             Queue<string> testQueue = new Queue<string>();
-            string userInput;
+            string? userInput;
 
             Console.WriteLine("\n---- Queuemeny  ----");
             Console.WriteLine("+[string] : Enqueue sträng i queue.");
@@ -187,7 +187,7 @@ namespace SkalProj_Datastrukturer_Minne
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Input får inte vara tom!");
+                    Console.WriteLine($"Input får inte vara tom {e.Message}!");
                 }
                 switch (nav)
                 {
@@ -246,7 +246,7 @@ namespace SkalProj_Datastrukturer_Minne
              * Make sure to look at the stack after pushing and and poping to see how it behaves
             */
             Stack<string> testStack = new Stack<string>();
-            string userInput;
+            string? userInput;
 
             Console.WriteLine("\n---- Stackmeny  ----");
             Console.WriteLine("+[string] : Lägg till sträng i stacken.");
@@ -275,9 +275,9 @@ namespace SkalProj_Datastrukturer_Minne
                     nav = userInput.ToUpper()[0];
                     value = userInput.Substring(1);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    Console.WriteLine("Input får inte vara tom!");
+                    Console.WriteLine($"Input får inte vara tom {e.Message}!");
                 }
                 switch (nav)
                 {
@@ -344,7 +344,7 @@ namespace SkalProj_Datastrukturer_Minne
             Console.WriteLine("---- Omvänd text ----");
             Console.WriteLine("Ange texten som ska vändas: ");
 
-            string userString = Console.ReadLine();
+            string? userString = Console.ReadLine();
 
             if (string.IsNullOrEmpty(userString) || string.IsNullOrWhiteSpace(userString))
             {
@@ -376,9 +376,65 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of correct: (()), {}, [({})],  List<int> list = new List<int>() { 1, 2, 3, 4 };
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
+            Console.WriteLine("\n---- Kontrollera parentesmeny  ----");
+            Console.WriteLine("1. Kontrollera om en sträng har korrekt formaterade parenteser.");
+            Console.WriteLine("2. Giltiga parenteser: (), {}, []");
+            Console.WriteLine();
+            Console.Write("Ange en sträng för att kontrollera: ");
 
+            string userInput = "";
+            try
+            {
+                userInput = Console.ReadLine();
+                if (string.IsNullOrEmpty(userInput))
+                {
+                    Console.WriteLine("Du måste ange något!");
+                    return;
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Input får inte vara tom!");
+            }
+
+            bool isWellFormed = hasCorrectParanthesis(userInput);
+            Console.WriteLine($"Result: {(isWellFormed ? "Well formed" : "Not well formed")}");
+            Console.WriteLine();
         }
 
+        /// <summary>
+        /// Check if paranthesis in a string are well formed or not
+        /// </summary>
+        /// <param name="userInput">Sting to check</param>
+        /// <returns>True if well formed, false if not</returns>
+        static bool hasCorrectParanthesis(string str)
+        {
+            Stack<char> bs = new Stack<char>();
+            Dictionary<char, char> bracketPairs = new Dictionary<char, char>
+            {
+                { ')', '(' },
+                { '}', '{' },
+                { ']', '[' }
+            };
+            foreach (char c in str)
+            {
+                if (c == '(' || c == '{' || c == '[')
+                {
+                    bs.Push(c);
+                }
+                else if (c == ')' || c == '}' || c == ']')
+                {
+                    if (bs.Count == 0)
+                        return false;
+
+                    char top = bs.Pop();
+
+                    if (top != bracketPairs[c])
+                        return false;
+                }
+            }
+            return bs.Count == 0;
+        }
     }
 }
 
