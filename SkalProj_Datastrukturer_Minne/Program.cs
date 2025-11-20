@@ -215,7 +215,7 @@ namespace SkalProj_Datastrukturer_Minne
                         if (string.IsNullOrEmpty(userInput) || string.IsNullOrWhiteSpace(userInput))
                             continue;
 
-                        char nav = userInput[0];
+                        char nav = userInput.ToUpper()[0];
                         string value = input.substring(1);
 
                         switch (nav)
@@ -237,6 +237,9 @@ namespace SkalProj_Datastrukturer_Minne
                                     Console.WriteLine("Stacken är tom!");
                                 }
                                 break;
+                            case 'R':
+                                ReverseText();
+                                break;
                             case '0':
                                 return;
                             default:
@@ -245,7 +248,39 @@ namespace SkalProj_Datastrukturer_Minne
                                 break;
                         }
                         Console.WriteLine();
-                        while (userInput[0] != '0') ;
+                        while (userInput.ToUpper()[0] != '0');
+                    }
+
+                    /// <summary>
+                    /// Reversed a text string method using stack
+                    /// </summary>
+                    static void ReverseText() {
+                        Console.WriteLine("---- Omvänd text ----");
+                        Console.WriteLine("Ange texten som ska vändas: ");
+
+                        string userString = Console.ReadLine();
+
+                        if (string.IsNullOrEmpty(userString) || string.IsNullOrWhiteSpace(userString))
+                        {
+                            Console.WriteLine("Ingen text hittades!");
+                            return;
+                        }
+
+                        Stack<char> sc = new Stack<char>();
+
+                        foreach (var c in userString)
+                        {
+                            sc.Push(c);
+                        }
+
+                        string reversedString = "";
+                        while (sc.Count>0)
+                        {
+                            reversedString += sc.Pop();
+                        }
+
+                        Console.WriteLine($"Originalsträngen är: {userString}");
+                        Console.WriteLine($"Den omvända strängen är: {reversedString}");
                     }
 
         static void CheckParanthesis()
