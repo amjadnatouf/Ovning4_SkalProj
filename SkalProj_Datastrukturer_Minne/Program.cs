@@ -400,6 +400,14 @@ namespace SkalProj_Datastrukturer_Minne
             bool isWellFormed = hasCorrectParanthesis(userInput);
             Console.WriteLine($"Result: {(isWellFormed ? "Well formed" : "Not well formed")}");
             Console.WriteLine();
+
+            /*
+            * Svar på frågorna - Ovning 4:
+            * 
+            * 1. Vilken datastruktur använder du
+            * Stack användes för att implementera CheckParanthesis-metoden eftersom den använder FILO, vilket
+            * passar perfekt när vi kollar efter öppnings- och stängningsparenteser
+            */
         }
 
         /// <summary>
