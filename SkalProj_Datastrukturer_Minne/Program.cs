@@ -13,14 +13,17 @@ namespace SkalProj_Datastrukturer_Minne
 
             while (true)
             {
-                Console.WriteLine("Choose an option by entering its number (1–7), or press 'q' to exit:"
-                    + "\n1. Examine a List"
-                    + "\n2. Examine a Queue"
-                    + "\n3. Examine a Stack"
-                    + "\n4. CheckParenthesis"
-                    + "\n5. CheckRecursiveOdd"
-                    + "\n6. CheckRecursiveEvven"
-                    + "\n7. CheckFibonacciRecursive"
+                Console.WriteLine("Choose an option by entering its number (0–9), or press 'q' to exit:"
+                    + "\n0. Examine a List"
+                    + "\n1. Examine a Queue"
+                    + "\n2. Examine a Stack"
+                    + "\n3. CheckParenthesis"
+                    + "\n4. CheckRecursiveOdd"
+                    + "\n5. CheckRecursiveEven"
+                    + "\n6. CheckFibonacciRecursive"
+                    + "\n7. CheckIterativeOdd"
+                    + "\n8. CheckIterativeEven"
+                    + "\n9. CheckFibonacciIterative"
                     + "\n0. Exit the application\n");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -35,26 +38,35 @@ namespace SkalProj_Datastrukturer_Minne
                 }
                 switch (input)
                 {
-                    case '1':
+                    case '0':
                         ExamineList();
                         break;
-                    case '2':
+                    case '1':
                         ExamineQueue();
                         break;
-                    case '3':
+                    case '2':
                         ExamineStack();
                         break;
-                    case '4':
+                    case '3':
                         CheckParanthesis();
                         break;
-                    case '5':
+                    case '4':
                         ExamineRecursiveOdd();
                         break;
-                    case '6':
+                    case '5':
                         ExamineRecursiveEven();
                         break;
-                    case '7':
+                    case '6':
                         ExamineFibonacciRecursive();
+                        break;
+                    case '7':
+                        ExamineIterativeOdd();
+                        break;
+                    case '8':
+                        ExamineIterativeEven();
+                        break;
+                    case '9':
+                        ExamineFibonacciIterative();
                         break;
                     /*
                      * Extend the menu to include the recursive 
@@ -64,7 +76,7 @@ namespace SkalProj_Datastrukturer_Minne
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("Choose an option by entering its number (1-7), or press 'q' to exit:");
+                        Console.WriteLine("Choose an option by entering its number (0-9), or press 'q' to exit:");
                         break;
                 }
             }
@@ -552,6 +564,11 @@ namespace SkalProj_Datastrukturer_Minne
                 {
                     Console.Write($"{FibonacciRecursive(i)}{(i < n && i < 15 ? ", " : "")}");
                 }
+                if (n > 15)
+                {
+                    // showing first 16 only due to recursion depth
+                    Console.Write(" ...");
+                }
                 Console.WriteLine("\n");
             }
             else
@@ -578,6 +595,152 @@ namespace SkalProj_Datastrukturer_Minne
             }
             // Recursive case: f(n) = f(n-1) + f(n-2)
             return FibonacciRecursive(n - 1) + FibonacciRecursive(n - 2);
+        }
+
+
+        /// <summary>
+        /// Examine IterativeOdd by reading n from the user and printing the n-th odd number and its sequence
+        /// </summary>
+        static void ExamineIterativeOdd()
+        {
+            Console.WriteLine("\n--- Examine IterativeOdd ---");
+            Console.Write("Ange n: ");
+            if (int.TryParse(Console.ReadLine(), out int n) && n > 0)
+            {
+                int result = IterativeOdd(n);
+                Console.WriteLine($"\nDet {n}:e udda talet är: {result}");
+
+                // Show sequence
+                Console.Write("Sekvens: ");
+                for (int i = 1; i <= n; i++)
+                {
+                    Console.Write($"{IterativeOdd(i)}{(i < n ? ", " : "")}");
+                }
+                Console.WriteLine("\n");
+            }
+            else
+            {
+                Console.WriteLine("Ogiltig input!\n");
+            }
+        }
+
+        /// <summary>
+        /// Iteratively calculates the n-th odd number
+        /// </summary>
+        /// <param name="n">The position (n) of the odd number to compute</param>
+        /// <returns>The n-th odd number</returns>
+        static int IterativeOdd(int n)
+        {
+            int result = 1;
+
+            // Start from 1 and add 2 for each step until we reach n
+            for (int i = 0; i < n - 1; i++)
+            {
+                result += 2;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Examine IterativeEven by reading n from the user and printing the n-th even number and its sequence
+        /// </summary>
+        static void ExamineIterativeEven()
+        {
+            Console.WriteLine("\n--- Examine IterativeEven ---");
+            Console.Write("Ange n: ");
+            if (int.TryParse(Console.ReadLine(), out int n) && n > 0)
+            {
+                int result = IterativeEven(n);
+                Console.WriteLine($"\nDet {n}:e jämnt talet är: {result}");
+
+
+                // Show sequence
+                Console.Write("Sekvens: ");
+                for (int i = 1; i <= n; i++)
+                {
+                    Console.Write($"{IterativeEven(i)}{(i < n ? ", " : "")}");
+                }
+                Console.WriteLine("\n");
+            }
+            else
+            {
+                Console.WriteLine("Ogiltig input!\n");
+            }
+        }
+
+        /// <summary>
+        /// Iteratively calculates the n-th even number
+        /// </summary>
+        /// <param name="n">The position (n) of the even number to compute</param>
+        /// <returns>The n-th even number</returns>
+        static int IterativeEven(int n)
+        {
+            int result = 2;
+
+            // Start from 2 and add 2 for each step until we reach n
+            for (int i = 0; i < n - 1; i++)
+            {
+                result += 2;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Examines FibonacciIterative by reading n from the user and printing the n-th Fibonacci number and its sequence
+        /// </summary>
+        static void ExamineFibonacciIterative()
+        {
+            Console.WriteLine("\n--- Testing Fibonacci (Iterative) ---");
+            Console.Write("Enter n: ");
+            if (int.TryParse(Console.ReadLine(), out int n) && n >= 0)
+            {
+                int result = FibonacciIterative(n);
+                Console.WriteLine($"Fibonacci({n}) = {result}");
+
+                // Show sequence
+                Console.Write("Sekvens: ");
+                for (int i = 0; i <= Math.Min(n, 30); i++)
+                {
+                    Console.Write($"{FibonacciIterative(i)}{(i < n && i < 15 ? ", " : "")}");
+                }
+                if (n > 15)
+                {
+                    // showing first 16 only due to recursion depth
+                    Console.Write(" ...");
+                }
+                Console.WriteLine("\n");
+            }
+            else
+            {
+                Console.WriteLine("Ogiltig input!\n");
+            }
+        }
+
+        /// <summary>
+        /// Iteratively calculates the n-th Fibonacci number
+        /// </summary>
+        /// <param name="n">The position (n) in the Fibonacci sequence</param>
+        /// <returns>The n-th Fibonacci number</returns>
+        static int FibonacciIterative(int n)
+        {
+            // Base cases
+            if (n == 0) return 0;
+            if (n == 1) return 1;
+
+            // Keep track of the two previous Fibonacci numbers
+            int prev2 = 0; // f(0)
+            int prev1 = 1; // f(1)
+            int current = 0;
+
+            // Calculate iteratively from f(2) to f(n)
+            for (int i = 2; i <= n; i++)
+            {
+                current = prev1 + prev2;
+                prev2 = prev1;
+                prev1 = current;
+            }
+            return current;
         }
     }
 }
