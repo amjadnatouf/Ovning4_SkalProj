@@ -165,7 +165,7 @@ namespace SkalProj_Datastrukturer_Minne
                             }
                             else
                             {
-                                Console.WriteLine("Queue är tomt!");
+                                Console.WriteLine("Queue är tom!");
                             }
                             break;
                         case '0':
@@ -198,12 +198,55 @@ namespace SkalProj_Datastrukturer_Minne
         /// </summary>
         static void ExamineStack()
         {
-            /*
-             * Loop this method until the user inputs something to exit to main menue.
-             * Create a switch with cases to push or pop items
-             * Make sure to look at the stack after pushing and and poping to see how it behaves
-            */
-                }
+                    /*
+                     * Loop this method until the user inputs something to exit to main menue.
+                     * Create a switch with cases to push or pop items
+                     * Make sure to look at the stack after pushing and and poping to see how it behaves
+                    */
+                    Stack<string> testStack = new Stack<string>();
+                    string userInput;
+
+                    do
+                    {
+                        // Check the stack
+                        Console.WriteLine(string.Join(", ", testStack.Select(x => x.ToString())));
+                        Console.WriteLine("Välj en åtgärd: ");
+                        userInput = Console.ReadLine();
+                        if (string.IsNullOrEmpty(userInput) || string.IsNullOrWhiteSpace(userInput))
+                            continue;
+
+                        char nav = userInput[0];
+                        string value = input.substring(1);
+
+                        switch (nav)
+                        {
+                            case '+':
+                                testStack.Push(value);
+                                Console.WriteLine($"{value} trycktes på stacken");
+                                Console.WriteLine($"Stack count: {testStack.Count}");
+                                break;
+                            case '-':
+                                if (testStack.Count > 0)
+                                {
+                                    string removed = testStack.Pop();
+                                    Console.WriteLine($"{removed} togs bort från stacken");
+                                    Console.WriteLine($"Stack count: {testQueue.Count}");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Stacken är tom!");
+                                }
+                                break;
+                            case '0':
+                                return;
+                            default:
+                                Console.WriteLine("Vänligen välj en åtgärd: '+' (lägg till objekt),"
+                                    + " '-' (ta bort objekt) eller '0' (återgå till huvudmenyn)");
+                                break;
+                        }
+                        Console.WriteLine();
+                        while (userInput[0] != '0') ;
+                    }
 
         static void CheckParanthesis()
         {
