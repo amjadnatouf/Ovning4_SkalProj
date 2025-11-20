@@ -249,6 +249,28 @@ namespace SkalProj_Datastrukturer_Minne
                         }
                         Console.WriteLine();
                         while (userInput.ToUpper()[0] != '0');
+                        /*
+                        * Svar på frågorna - Ovning 3:
+                        * 
+                        * 1. Simulera följande kö på papper:
+                        * a. ICA öppnar och kön till kassan är       -> []
+                        * b. Kalle ställer sig i                     -> [Kalle]
+                        * c. Greta ställer sig i                     -> [Kalle, Greta]
+                        * d. Kalle blir expedierad och lämnar        -> [Kalle]
+                        * e. Stina ställer sig i                     -> [Kalle, Stina]
+                        * f. Greta blir expedierad och lämnar        -> [Kalle]
+                        * g. Olle ställer sig i                      -> [Kalle, Olle]
+                        * h.      … Stack-klassen fungerar enligt Först In Sist ut (FILO) principen
+                        * vilket betyder att det sista elementet som läggs till tas bort först. Därför
+                        * fungerar stacken inte för att simulera en kö som i exemplet med ICA.
+                        * Förklaring med exemplet:
+                        * I kön: [Kalle, Greta] står Kalle först. När Kalle ska expedieras tas han bort först,
+                        * vilket fungerar korrekt med en kö (FIFO).
+                        * Om vi istället använde en stack, skulle det senaste tillsatta elementet (Greta) tas bort först,
+                        * vilket bryter ordningen. Felet uppstår alltså redan vid första expedieringen och fortsätter för
+                        * varje person som ska expedieras, eftersom stacken alltid tar bort det översta elementet,
+                        * inte den som stått längst i kön. 
+                        */
                     }
 
                     /// <summary>
