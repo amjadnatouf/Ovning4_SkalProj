@@ -13,11 +13,14 @@ namespace SkalProj_Datastrukturer_Minne
 
             while (true)
             {
-                Console.WriteLine("Please navigate through the menu by inputting the number \n(1, 2, 3 ,4, 0) of your choice"
+                Console.WriteLine("Choose an option by entering its number (1–7), or press 'q' to exit:"
                     + "\n1. Examine a List"
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
                     + "\n4. CheckParenthesis"
+                    + "\n5. CheckRecursiveOdd"
+                    + "\n6. CheckRecursiveEvven"
+                    + "\n7. CheckFibonacciRecursive"
                     + "\n0. Exit the application\n");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -44,15 +47,24 @@ namespace SkalProj_Datastrukturer_Minne
                     case '4':
                         CheckParanthesis();
                         break;
+                    case '5':
+                        ExamineRecursiveOdd();
+                        break;
+                    case '6':
+                        ExamineRecursiveEven();
+                        break;
+                    case '7':
+                        ExamineFibonacciRecursive();
+                        break;
                     /*
                      * Extend the menu to include the recursive 
                      * and iterative exercises.
                      */
-                    case '0':
+                    case 'q':
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("Please enter some valid input (0, 1, 2, 3, 4)");
+                        Console.WriteLine("Choose an option by entering its number (1-7), or press 'q' to exit:");
                         break;
                 }
             }
@@ -84,7 +96,7 @@ namespace SkalProj_Datastrukturer_Minne
                     userInput = Console.ReadLine();
                     if (string.IsNullOrEmpty(userInput))
                     {
-                        Console.WriteLine("Du måste ange något!");
+                        Console.WriteLine("\nDu måste ange något input!\n");
                         return;
                     }
 
@@ -178,7 +190,7 @@ namespace SkalProj_Datastrukturer_Minne
                     userInput = Console.ReadLine();
                     if (string.IsNullOrEmpty(userInput))
                     {
-                        Console.WriteLine("Du måste ange något!");
+                        Console.WriteLine("\nDu måste ange något input!\n");
                         return;
                     }
 
@@ -263,7 +275,7 @@ namespace SkalProj_Datastrukturer_Minne
                     userInput = Console.ReadLine();
                     if (string.IsNullOrEmpty(userInput))
                     {
-                        Console.WriteLine("Du måste ange något!");
+                        Console.WriteLine("\nDu måste ange något!\n");
                         return;
                     }
 
@@ -364,6 +376,9 @@ namespace SkalProj_Datastrukturer_Minne
             Console.WriteLine($"Den omvända strängen är: {reversedString}");
         }
 
+        /// <summary>
+        /// Reads a string from the user and checks whether its parentheses are well-formed
+        /// </summary>
         static void CheckParanthesis()
         {
             Console.WriteLine("\n---- Kontrollera parentesmeny  ----");
@@ -378,7 +393,7 @@ namespace SkalProj_Datastrukturer_Minne
                 userInput = Console.ReadLine();
                 if (string.IsNullOrEmpty(userInput))
                 {
-                    Console.WriteLine("Du måste ange något!");
+                    Console.WriteLine("\nDu måste ange något input!\n");
                     return;
                 }
             }
@@ -433,6 +448,136 @@ namespace SkalProj_Datastrukturer_Minne
             }
             return bs.Count == 0;
         }
+
+        /// <summary>
+        /// Tests RecursiveOdd by reading n from the user and printing the n-th odd number and its sequence
+        /// </summary>
+        static void ExamineRecursiveOdd()
+        {
+            Console.WriteLine("\n--- Examine RecursiveOdd ---");
+            Console.Write("Ange n: ");
+            if (int.TryParse(Console.ReadLine(), out int n) && n > 0)
+            {
+                int result = RecursiveOdd(n);
+                Console.WriteLine($"\nDet {n}:e udda talet är: {result}");
+
+                // Show sequence
+                Console.Write("Sekvens: ");
+                for (int i = 1; i <= n; i++)
+                {
+                    Console.Write($"{RecursiveOdd(i)}{(i < n ? ", " : "")}");
+                }
+                Console.WriteLine("\n");
+            }
+            else
+            {
+                Console.WriteLine("Ogiltig input!\n");
+            }
+        }
+
+        /// <summary>
+        /// Recursively calculates the n-th odd number
+        /// </summary>
+        /// <param name="n">The position (n) of the odd number to compute</param>
+        /// <returns>The n-th odd number</returns>
+        static int RecursiveOdd(int n)
+        {
+            // Base case: the first odd number is 1
+            if (n == 1)
+            {
+                return 1;
+            }
+            // Recursive case: nth odd = (n-1)th odd + 2
+            return RecursiveOdd(n - 1) + 2;
+        }
+
+        /// <summary>
+        /// Tests RecursiveEven by reading n from the user and printing the n-th even number and its sequence
+        /// </summary>
+        static void ExamineRecursiveEven()
+        {
+            Console.WriteLine("\n--- Examine RecursiveEven ---");
+            Console.Write("Ange n: ");
+            if (int.TryParse(Console.ReadLine(), out int n) && n > 0)
+            {
+                int result = RecursiveEven(n);
+                Console.WriteLine($"\nDet {n}:e jämnt talet är: {result}");
+
+
+                // Show sequence
+                Console.Write("Sekvens: ");
+                for (int i = 1; i <= n; i++)
+                {
+                    Console.Write($"{RecursiveEven(i)}{(i < n ? ", " : "")}");
+                }
+                Console.WriteLine("\n");
+            }
+            else
+            {
+                Console.WriteLine("Ogiltig input!\n");
+            }
+        }
+
+        /// <summary>
+        /// Recursively calculates the n-th even number
+        /// </summary>
+        /// <param name="n">The position (n) of the even number to compute</param>
+        /// <returns>The n-th even number</returns>
+        static int RecursiveEven(int n)
+        {
+            // Base case: the first even number is 2
+            if (n == 1)
+            {
+                return 2;
+            }
+            // Recursive case: nth even = (n-1)th even + 2
+            return RecursiveEven(n - 1) + 2;
+        }
+
+        /// <summary>
+        /// Examines FibonacciRecursive by reading n from the user and printing the n-th Fibonacci number and its sequence
+        /// </summary>
+        static void ExamineFibonacciRecursive()
+        {
+            Console.WriteLine("\n--- Examine Fibonacci Recursive ---");
+            Console.Write("Ange n: ");
+            if (int.TryParse(Console.ReadLine(), out int n) && n >= 0)
+            {
+                int result = FibonacciRecursive(n);
+                Console.WriteLine($"Fibonacci({n}) = {result}");
+
+                // Show sequence
+                Console.Write("Sekvens: ");
+                for (int i = 0; i <= Math.Min(n, 15); i++)
+                {
+                    Console.Write($"{FibonacciRecursive(i)}{(i < n && i < 15 ? ", " : "")}");
+                }
+                Console.WriteLine("\n");
+            }
+            else
+            {
+                Console.WriteLine("Ogiltig input!\n");
+            }
+        }
+
+        /// <summary>
+        /// Recursively calculates the n-th Fibonacci number
+        /// </summary>
+        /// <param name="n">The position (n) in the Fibonacci sequence</param>
+        /// <returns>The n-th Fibonacci number</returns>
+        static int FibonacciRecursive(int n)
+        {
+            // Base cases
+            if (n == 0)
+            {
+                return 0;
+            }
+            if (n == 1)
+            {
+                return 1;
+            }
+            // Recursive case: f(n) = f(n-1) + f(n-2)
+            return FibonacciRecursive(n - 1) + FibonacciRecursive(n - 2);
+        }
     }
 }
-
